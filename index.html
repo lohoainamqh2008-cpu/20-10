@@ -6832,9 +6832,10 @@ html.tiny-pc-beauty-v12 #uiverse-starfield #stars3 {
     <canvas id="laCanvas">
     </canvas>
     <!-- Âm thanh nhúng sẵn, không cần thư mục đi kèm. -->
-    <!-- ===== Tiny Letter - A meaningful finale ===== -->
-    <style id="tiny-letter-enhancement">
-      #tiny-letter-container {
+    </div>
+    <!-- ===== Tiny's Wish Letter - Formal Letter Format ===== -->
+    <style id="tiny-formal-letter">
+      #tiny-formal-letter-container {
         position: fixed;
         bottom: 0;
         left: 0;
@@ -6847,41 +6848,116 @@ html.tiny-pc-beauty-v12 #uiverse-starfield #stars3 {
         pointer-events: none;
       }
       
-      #tiny-letter-container.show-letter {
-        height: 60vh;
+      #tiny-formal-letter-container.show-letter {
+        height: 75vh;
         opacity: 1;
         pointer-events: auto;
       }
       
-      .tiny-letter-backdrop {
+      .tiny-letter-wrapper {
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, rgba(10, 20, 40, 0.98) 0%, rgba(15, 35, 60, 0.96) 50%, rgba(8, 25, 50, 0.98) 100%);
-        backdrop-filter: blur(8px);
-        border-top: 2px solid rgba(147, 235, 255, 0.35);
-        box-shadow: 0 -8px 32px rgba(99, 180, 255, 0.15);
-      }
-      
-      .tiny-letter-content {
-        position: relative;
-        height: 100%;
-        padding: 2.5rem 3rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: #e5f7ff;
-        font-family: 'Courier Prime', monospace;
+        background: linear-gradient(135deg, rgba(8, 15, 35, 0.99) 0%, rgba(12, 28, 55, 0.98) 50%, rgba(5, 18, 42, 0.99) 100%);
+        backdrop-filter: blur(10px);
+        border-top: 2px solid rgba(150, 240, 255, 0.4);
+        box-shadow: 
+          0 -8px 32px rgba(100, 200, 255, 0.15),
+          inset 0 1px 0 rgba(200, 240, 255, 0.1);
         overflow-y: auto;
-        opacity: 0;
-        transform: translateY(20px);
-        animation: letterFadeInUp 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(150, 240, 255, 0.3) transparent;
       }
       
-      @keyframes letterFadeInUp {
+      .tiny-letter-wrapper::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      .tiny-letter-wrapper::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      .tiny-letter-wrapper::-webkit-scrollbar-thumb {
+        background: rgba(150, 240, 255, 0.3);
+        border-radius: 3px;
+      }
+      
+      .tiny-letter-paper {
+        max-width: 680px;
+        margin: 2rem auto;
+        padding: 3.5rem 3rem;
+        background: linear-gradient(135deg, rgba(15, 35, 70, 0.8) 0%, rgba(20, 45, 80, 0.75) 100%);
+        border: 1px solid rgba(150, 230, 255, 0.25);
+        border-radius: 8px;
+        box-shadow: 
+          0 8px 32px rgba(80, 150, 255, 0.1),
+          inset 0 0 20px rgba(150, 240, 255, 0.05);
+        font-family: 'Courier Prime', monospace;
+        color: #d8f4ff;
+        line-height: 1.8;
+        position: relative;
+        animation: letterPaperAppear 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+      }
+      
+      @keyframes letterPaperAppear {
         from {
           opacity: 0;
-          transform: translateY(20px);
+          transform: translateY(30px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      
+      .tiny-letter-date {
+        text-align: right;
+        font-size: 1rem;
+        color: #b8e8ff;
+        margin-bottom: 2rem;
+        letter-spacing: 0.5px;
+        text-shadow: 0 0 8px rgba(184, 232, 255, 0.3);
+      }
+      
+      .tiny-letter-recipient {
+        margin-bottom: 2.5rem;
+        font-size: 1.05rem;
+        color: #d8f4ff;
+      }
+      
+      .tiny-letter-recipient-line {
+        margin: 0.4rem 0;
+      }
+      
+      .tiny-letter-greeting {
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #b4f1ff;
+        text-shadow: 0 0 10px rgba(180, 241, 255, 0.4);
+      }
+      
+      .tiny-letter-body {
+        margin-bottom: 2rem;
+        font-size: 1.05rem;
+        letter-spacing: 0.3px;
+      }
+      
+      .tiny-letter-paragraph {
+        margin-bottom: 1.5rem;
+        text-indent: 2em;
+        text-align: justify;
+        animation: letterTextFadeIn 0.8s ease-out backwards;
+      }
+      
+      .tiny-letter-paragraph:nth-child(1) { animation-delay: 0.5s; }
+      .tiny-letter-paragraph:nth-child(2) { animation-delay: 0.65s; }
+      .tiny-letter-paragraph:nth-child(3) { animation-delay: 0.8s; }
+      .tiny-letter-paragraph:nth-child(4) { animation-delay: 0.95s; }
+      
+      @keyframes letterTextFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
         }
         to {
           opacity: 1;
@@ -6889,398 +6965,205 @@ html.tiny-pc-beauty-v12 #uiverse-starfield #stars3 {
         }
       }
       
-      .tiny-letter-title {
-        font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-        font-weight: 700;
-        color: #b4f1ff;
-        text-shadow: 0 0 20px rgba(147, 235, 255, 0.6), 0 0 40px rgba(100, 200, 255, 0.2);
-        letter-spacing: 2px;
-        margin-bottom: 1.5rem;
-        text-align: center;
-        line-height: 1.3;
+      .tiny-letter-closing {
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+        font-size: 1.05rem;
+        color: #b8e8ff;
       }
       
-      .tiny-letter-text {
-        font-size: clamp(0.95rem, 1.6vw, 1.1rem);
-        line-height: 1.7;
-        text-align: center;
-        max-width: 700px;
-        color: #d4f0ff;
-        text-shadow: 0 0 8px rgba(180, 235, 255, 0.3);
-        letter-spacing: 0.5px;
-        margin-bottom: 1.2rem;
-        animation: letterTextShimmer 3s ease-in-out infinite;
-      }
-      
-      .tiny-letter-text:nth-child(2) { animation-delay: 0.2s; }
-      .tiny-letter-text:nth-child(3) { animation-delay: 0.4s; }
-      .tiny-letter-text:nth-child(4) { animation-delay: 0.6s; }
-      .tiny-letter-text:nth-child(5) { animation-delay: 0.8s; }
-      
-      @keyframes letterTextShimmer {
-        0%, 100% { opacity: 0.9; text-shadow: 0 0 8px rgba(180, 235, 255, 0.3); }
-        50% { opacity: 1; text-shadow: 0 0 16px rgba(180, 235, 255, 0.6); }
+      .tiny-letter-signature-space {
+        height: 3.5rem;
+        margin-bottom: 0.5rem;
       }
       
       .tiny-letter-signature {
-        margin-top: 2rem;
+        font-size: 1.2rem;
+        font-weight: 600;
         color: #ffb6d9;
-        font-style: italic;
-        text-shadow: 0 0 12px rgba(255, 182, 217, 0.4);
-        font-size: clamp(0.9rem, 1.4vw, 1rem);
+        text-shadow: 0 0 12px rgba(255, 182, 217, 0.5);
+        letter-spacing: 1px;
+        animation: signaturePulse 3s ease-in-out infinite 1.5s;
       }
       
-      .tiny-letter-decoration {
+      @keyframes signaturePulse {
+        0%, 100% {
+          text-shadow: 0 0 12px rgba(255, 182, 217, 0.5);
+          color: #ffb6d9;
+        }
+        50% {
+          text-shadow: 0 0 18px rgba(255, 182, 217, 0.8);
+          color: #ffc6e6;
+        }
+      }
+      
+      .tiny-letter-decoration-top {
         position: absolute;
-        width: 3px;
-        height: 40px;
-        background: linear-gradient(to bottom, rgba(147, 235, 255, 0.6), transparent);
-        top: 20px;
+        top: 1.5rem;
         left: 50%;
         transform: translateX(-50%);
+        width: 60px;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(150, 240, 255, 0.4), transparent);
         opacity: 0;
-        animation: letterDecorFadeDown 1s ease-out 0.8s forwards;
+        animation: decorFadeIn 1s ease-out 0.4s forwards;
       }
       
-      .tiny-letter-decoration::after {
-        content: '';
+      .tiny-letter-decoration-bottom {
         position: absolute;
-        width: 8px;
-        height: 8px;
-        background: rgba(147, 235, 255, 0.5);
-        border-radius: 50%;
-        top: -6px;
+        bottom: 1.5rem;
         left: 50%;
         transform: translateX(-50%);
+        width: 60px;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(150, 240, 255, 0.4), transparent);
+        opacity: 0;
+        animation: decorFadeIn 1s ease-out 1.8s forwards;
       }
       
-      @keyframes letterDecorFadeDown {
-        from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+      @keyframes decorFadeIn {
+        from {
+          opacity: 0;
+          width: 0;
+        }
+        to {
+          opacity: 1;
+          width: 60px;
+        }
       }
       
-      .tiny-letter-stars {
+      .tiny-letter-stars-bg {
         position: absolute;
         width: 100%;
         height: 100%;
-        pointer-events: none;
-      }
-      
-      .tiny-letter-star {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: #a3f8ff;
-        border-radius: 50%;
-        opacity: 0;
-        animation: starTwinkleInLetter 2s ease-in-out infinite;
-      }
-      
-      @keyframes starTwinkleInLetter {
-        0%, 100% { opacity: 0.2; }
-        50% { opacity: 0.8; }
-      }
-      
-      @media (max-width: 768px) {
-        #tiny-letter-container.show-letter { height: 70vh; }
-        .tiny-letter-content { padding: 2rem 1.5rem; }
-        .tiny-letter-title { margin-bottom: 1.2rem; }
-        .tiny-letter-text { margin-bottom: 0.8rem; }
-        .tiny-letter-signature { margin-top: 1.5rem; }
-      }
-    </style>
-    
-    <div id="tiny-letter-container">
-      <div class="tiny-letter-backdrop"></div>
-      <div class="tiny-letter-stars" id="tiny-letter-stars"></div>
-      <div class="tiny-letter-decoration"></div>
-      <div class="tiny-letter-content">
-        <h2 class="tiny-letter-title">Một Lá Thư từ Trái Tim</h2>
-        <p class="tiny-letter-text">Những điều tốt nhất trong cuộc sống thường không thể nhìn thấy bằng mắt,</p>
-        <p class="tiny-letter-text">mà phải cảm nhận bằng trái tim.</p>
-        <p class="tiny-letter-text">Cảm ơn bạn đã dừng lại, nghe lắng, và tin tưởng vào điều kỳ diệu.</p>
-        <p class="tiny-letter-text">Ngày hôm nay, cùng với những sao trên trời và những mơ ước trong lòng,</p>
-        <p class="tiny-letter-text">tớ muốn nhắn nhủ: hạnh phúc của bạn là ánh sáng sẵn có dưới chân.</p>
-        <div class="tiny-letter-signature">✧ Tiny ✧</div>
-      </div>
-    </div>
-    
-    <script id="tiny-letter-controller">
-    (function() {
-      const letterContainer = document.getElementById('tiny-letter-container');
-      const letterStars = document.getElementById('tiny-letter-stars');
-      
-      // Tạo những ngôi sao nhỏ lắp láy trong vùng thư
-      function createLetterStars() {
-        for (let i = 0; i < 12; i++) {
-          const star = document.createElement('div');
-          star.className = 'tiny-letter-star';
-          star.style.left = Math.random() * 100 + '%';
-          star.style.top = Math.random() * 100 + '%';
-          star.style.animationDelay = (Math.random() * 2) + 's';
-          star.style.animationDuration = (1.5 + Math.random() * 1.5) + 's';
-          letterStars.appendChild(star);
-        }
-      }
-      
-      createLetterStars();
-      
-      // Hiện thư khi hoàn tất các cảnh chính (tương tự logic hiện có)
-      window.showTinyLetter = function() {
-        if (letterContainer) {
-          letterContainer.classList.add('show-letter');
-        }
-      };
-      
-      // Ẩn thư khi cuộn (optional, để giữ thoải mái)
-      window.hideTinyLetter = function() {
-        if (letterContainer) {
-          letterContainer.classList.remove('show-letter');
-        }
-      };
-    })();
-    </script>
-    <!-- ===== Tiny Enhancement V1: Harmonious polish & meaningful finale ===== -->
-    <!-- Thêm những chi tiết nhỏ để làm sáng tỏ hơn, đẹp hơn, mà vẫn giữ nguyên linh hồn gốc -->
-    <style id="tiny-enhancements-v1">
-      /* Làm mềm mại hơn các chuyển tiếp giữa các cảnh */
-      body {
-        --transition-flow: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      
-      /* Thêm glow nhẹ cho toàn bộ, không làm thay đổi cốt lõi */
-      #khung-mat {
-        filter: drop-shadow(0 0 12px rgba(150, 235, 255, 0.12));
-        transition: filter var(--transition-flow);
-      }
-      
-      /* Nhấn mạnh những khoảnh khắc quan trọng với ánh sáng tinh tế */
-      @keyframes tinyEnhancementGlow {
-        0%, 100% { 
-          filter: drop-shadow(0 0 12px rgba(150, 235, 255, 0.12));
-        }
-        50% { 
-          filter: drop-shadow(0 0 18px rgba(150, 235, 255, 0.2));
-        }
-      }
-      
-      /* Đối với các text layer, thêm một chút magic mà không làm mất đi essence */
-      .text-layer {
-        transition: text-shadow var(--transition-flow);
-      }
-      
-      /* Làm cho các overlay chuyển động mượt mà hơn */
-      #pink-overlay,
-      #vang-overlay,
-      #xanh-overlay {
-        transition: opacity 3.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-      }
-    </style>
-
-    <!-- ===== Tiny Letter - A meaningful finale ===== -->
-    <style id="tiny-letter-enhancement">
-      #tiny-letter-container {
-        position: fixed;
-        bottom: 0;
+        top: 0;
         left: 0;
-        right: 0;
-        height: 0;
-        opacity: 0;
-        overflow: hidden;
-        z-index: 100;
-        transition: height 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 2.8s ease-in-out;
         pointer-events: none;
+        z-index: -1;
       }
       
-      #tiny-letter-container.show-letter {
-        height: 60vh;
-        opacity: 1;
-        pointer-events: auto;
-      }
-      
-      .tiny-letter-backdrop {
+      .tiny-star-bg {
         position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(10, 20, 40, 0.98) 0%, rgba(15, 35, 60, 0.96) 50%, rgba(8, 25, 50, 0.98) 100%);
-        backdrop-filter: blur(8px);
-        border-top: 2px solid rgba(147, 235, 255, 0.35);
-        box-shadow: 0 -8px 32px rgba(99, 180, 255, 0.15);
-      }
-      
-      .tiny-letter-content {
-        position: relative;
-        height: 100%;
-        padding: 2.5rem 3rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: #e5f7ff;
-        font-family: 'Courier Prime', monospace;
-        overflow-y: auto;
-        opacity: 0;
-        transform: translateY(20px);
-        animation: letterFadeInUp 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards;
-      }
-      
-      @keyframes letterFadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      
-      .tiny-letter-title {
-        font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-        font-weight: 700;
-        color: #b4f1ff;
-        text-shadow: 0 0 20px rgba(147, 235, 255, 0.6), 0 0 40px rgba(100, 200, 255, 0.2);
-        letter-spacing: 2px;
-        margin-bottom: 1.5rem;
-        text-align: center;
-        line-height: 1.3;
-      }
-      
-      .tiny-letter-text {
-        font-size: clamp(0.95rem, 1.6vw, 1.1rem);
-        line-height: 1.7;
-        text-align: center;
-        max-width: 700px;
-        color: #d4f0ff;
-        text-shadow: 0 0 8px rgba(180, 235, 255, 0.3);
-        letter-spacing: 0.5px;
-        margin-bottom: 1.2rem;
-        animation: letterTextShimmer 3s ease-in-out infinite;
-      }
-      
-      .tiny-letter-text:nth-child(2) { animation-delay: 0.2s; }
-      .tiny-letter-text:nth-child(3) { animation-delay: 0.4s; }
-      .tiny-letter-text:nth-child(4) { animation-delay: 0.6s; }
-      .tiny-letter-text:nth-child(5) { animation-delay: 0.8s; }
-      
-      @keyframes letterTextShimmer {
-        0%, 100% { opacity: 0.9; text-shadow: 0 0 8px rgba(180, 235, 255, 0.3); }
-        50% { opacity: 1; text-shadow: 0 0 16px rgba(180, 235, 255, 0.6); }
-      }
-      
-      .tiny-letter-signature {
-        margin-top: 2rem;
-        color: #ffb6d9;
-        font-style: italic;
-        text-shadow: 0 0 12px rgba(255, 182, 217, 0.4);
-        font-size: clamp(0.9rem, 1.4vw, 1rem);
-      }
-      
-      .tiny-letter-decoration {
-        position: absolute;
-        width: 3px;
-        height: 40px;
-        background: linear-gradient(to bottom, rgba(147, 235, 255, 0.6), transparent);
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        opacity: 0;
-        animation: letterDecorFadeDown 1s ease-out 0.8s forwards;
-      }
-      
-      .tiny-letter-decoration::after {
-        content: '';
-        position: absolute;
-        width: 8px;
-        height: 8px;
-        background: rgba(147, 235, 255, 0.5);
+        width: 1px;
+        height: 1px;
+        background: rgba(150, 240, 255, 0.3);
         border-radius: 50%;
-        top: -6px;
-        left: 50%;
-        transform: translateX(-50%);
+        animation: starBgTwinkle 3s ease-in-out infinite;
       }
       
-      @keyframes letterDecorFadeDown {
-        from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-        to { opacity: 1; transform: translateX(-50%) translateY(0); }
-      }
-      
-      .tiny-letter-stars {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-      }
-      
-      .tiny-letter-star {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: #a3f8ff;
-        border-radius: 50%;
-        opacity: 0;
-        animation: starTwinkleInLetter 2s ease-in-out infinite;
-      }
-      
-      @keyframes starTwinkleInLetter {
-        0%, 100% { opacity: 0.2; }
-        50% { opacity: 0.8; }
+      @keyframes starBgTwinkle {
+        0%, 100% { opacity: 0.1; }
+        50% { opacity: 0.4; }
       }
       
       @media (max-width: 768px) {
-        #tiny-letter-container.show-letter { height: 70vh; }
-        .tiny-letter-content { padding: 2rem 1.5rem; }
-        .tiny-letter-title { margin-bottom: 1.2rem; }
-        .tiny-letter-text { margin-bottom: 0.8rem; }
-        .tiny-letter-signature { margin-top: 1.5rem; }
+        #tiny-formal-letter-container.show-letter { height: 80vh; }
+        .tiny-letter-paper {
+          margin: 1.5rem auto;
+          padding: 2rem 1.5rem;
+          max-width: calc(100% - 1rem);
+        }
+        .tiny-letter-date { font-size: 0.95rem; }
+        .tiny-letter-recipient { font-size: 1rem; }
+        .tiny-letter-greeting { font-size: 1.05rem; }
+        .tiny-letter-body { font-size: 1rem; }
+        .tiny-letter-paragraph { text-indent: 1.5em; }
       }
     </style>
     
-    <div id="tiny-letter-container">
-      <div class="tiny-letter-backdrop"></div>
-      <div class="tiny-letter-stars" id="tiny-letter-stars"></div>
-      <div class="tiny-letter-decoration"></div>
-      <div class="tiny-letter-content">
-        <h2 class="tiny-letter-title">Một Lá Thư từ Trái Tim</h2>
-        <p class="tiny-letter-text">Những điều tốt nhất trong cuộc sống thường không thể nhìn thấy bằng mắt,</p>
-        <p class="tiny-letter-text">mà phải cảm nhận bằng trái tim.</p>
-        <p class="tiny-letter-text">Cảm ơn bạn đã dừng lại, nghe lắng, và tin tưởng vào điều kỳ diệu.</p>
-        <p class="tiny-letter-text">Ngày hôm nay, cùng với những sao trên trời và những mơ ước trong lòng,</p>
-        <p class="tiny-letter-text">tớ muốn nhắn nhủ: hạnh phúc của bạn là ánh sáng sẵn có dưới chân.</p>
-        <div class="tiny-letter-signature">✧ Tiny ✧</div>
+    <div id="tiny-formal-letter-container">
+      <div class="tiny-letter-stars-bg" id="tiny-letter-stars-bg"></div>
+      <div class="tiny-letter-wrapper">
+        <div class="tiny-letter-paper">
+          <div class="tiny-letter-decoration-top"></div>
+          
+          <div class="tiny-letter-date">20 tháng 10, năm 2026</div>
+          
+          <div class="tiny-letter-recipient">
+            <div class="tiny-letter-recipient-line">Gửi: Người bạn yêu quý,</div>
+          </div>
+          
+          <div class="tiny-letter-greeting">
+            Một lời chúc từ những ngôi sao,
+          </div>
+          
+          <div class="tiny-letter-body">
+            <p class="tiny-letter-paragraph">
+              Hôm nay, tôi viết thư này để gửi đến bạn những lời chúc chân thành nhất từ trái tim. 
+              Trong cuộc sống của chúng ta, có những khoảnh khắc tuyệt vời có thể không được nhận ra ngay, 
+              nhưng chúng tạo nên những tấm gương của niềm vui và hy vọng.
+            </p>
+            
+            <p class="tiny-letter-paragraph">
+              Tôi muốn bạn biết rằng, bất cứ những gì bạn đang trải qua, đều có ý nghĩa. 
+              Mỗi bước đi, mỗi nỗ lực, mỗi giấc mơ của bạn đều là ánh sáng sẽ chiếu sáng con đường phía trước. 
+              Hãy tin tưởng vào điều kỳ diệu, vì nó luôn ở trong tay bạn.
+            </p>
+            
+            <p class="tiny-letter-paragraph">
+              Cảm ơn bạn đã dừng lại, đã lắng nghe, đã tồn tại. Sự hiện diện của bạn 
+              làm cho thế giới này trở nên tốt đẹp hơn. Ngay cả những điều nhỏ nhất mà bạn làm, 
+              cũng có sức mạnh để thay đổi một ai đó trong cuộc sống của họ.
+            </p>
+            
+            <p class="tiny-letter-paragraph">
+              Hôm nay và mãi mãi, tôi chúc bạn sức khỏe, hạnh phúc, và những gì mà trái tim bạn mong muốn. 
+              Hãy nhớ rằng bạn xứng đáng với tất cả những điều tốt nhất. Mỗi sáng thức dậy là một cơ hội mới 
+              để yêu bản thân nhiều hơn, để mơ mộng lớn hơn, để sống đầy ý nghĩa hơn.
+            </p>
+          </div>
+          
+          <div class="tiny-letter-closing">
+            Với tình cảm sâu sắc,
+          </div>
+          
+          <div class="tiny-letter-signature-space"></div>
+          
+          <div class="tiny-letter-signature">✧ Tiny ✧</div>
+          
+          <div class="tiny-letter-decoration-bottom"></div>
+        </div>
       </div>
     </div>
     
-    <script id="tiny-letter-controller">
+    <script id="tiny-formal-letter-init">
     (function() {
-      const letterContainer = document.getElementById('tiny-letter-container');
-      const letterStars = document.getElementById('tiny-letter-stars');
+      const container = document.getElementById('tiny-formal-letter-container');
+      const starsBg = document.getElementById('tiny-letter-stars-bg');
       
-      // Tạo những ngôi sao nhỏ lắp láy trong vùng thư
-      function createLetterStars() {
-        for (let i = 0; i < 12; i++) {
+      // Tạo sao nền
+      function createBackgroundStars() {
+        for (let i = 0; i < 8; i++) {
           const star = document.createElement('div');
-          star.className = 'tiny-letter-star';
+          star.className = 'tiny-star-bg';
           star.style.left = Math.random() * 100 + '%';
           star.style.top = Math.random() * 100 + '%';
           star.style.animationDelay = (Math.random() * 2) + 's';
-          star.style.animationDuration = (1.5 + Math.random() * 1.5) + 's';
-          letterStars.appendChild(star);
+          star.style.animationDuration = (2 + Math.random() * 1.5) + 's';
+          starsBg.appendChild(star);
         }
       }
       
-      createLetterStars();
+      createBackgroundStars();
       
-      // Hiện thư khi hoàn tất các cảnh chính (tương tự logic hiện có)
-      window.showTinyLetter = function() {
-        if (letterContainer) {
-          letterContainer.classList.add('show-letter');
+      // Hiển thị thư
+      window.showTinyFormalLetter = function() {
+        if (container) {
+          container.classList.add('show-letter');
         }
       };
       
-      // Ẩn thư khi cuộn (optional, để giữ thoải mái)
-      window.hideTinyLetter = function() {
-        if (letterContainer) {
-          letterContainer.classList.remove('show-letter');
+      // Ẩn thư
+      window.hideTinyFormalLetter = function() {
+        if (container) {
+          container.classList.remove('show-letter');
+        }
+      };
+      
+      // Toggle thư
+      window.toggleTinyFormalLetter = function() {
+        if (container) {
+          container.classList.toggle('show-letter');
         }
       };
     })();
